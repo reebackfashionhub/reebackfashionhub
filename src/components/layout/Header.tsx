@@ -115,10 +115,10 @@ export default function Header({ onAuthClick }: HeaderProps) {
             </Link>
           </div>
 
-          <div className="flex items-center space-x-5">
+          <div className="flex items-center space-x-2 md:space-x-5">
             <button
               onClick={toggleTheme}
-              className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95"
+              className="hidden md:flex text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95"
               aria-label="Toggle theme"
             >
               {theme === 'light' ? (
@@ -153,7 +153,7 @@ export default function Header({ onAuthClick }: HeaderProps) {
 
             <Link
               to="/cart"
-              className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95 relative"
+              className="hidden md:flex text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95 relative"
               aria-label="Cart"
             >
               <ShoppingCart className="w-5 h-5" />
@@ -165,7 +165,7 @@ export default function Header({ onAuthClick }: HeaderProps) {
             </Link>
 
             {user ? (
-              <div className="relative group">
+              <div className="relative group hidden md:block">
                 <button className="flex items-center space-x-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95 outline-none">
                   <User className="w-5 h-5" />
                 </button>
@@ -211,7 +211,7 @@ export default function Header({ onAuthClick }: HeaderProps) {
             ) : (
               <button
                 onClick={onAuthClick}
-                className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95"
+                className="hidden md:flex text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95"
                 aria-label="Sign in"
               >
                 <User className="w-5 h-5" />
@@ -271,6 +271,22 @@ export default function Header({ onAuthClick }: HeaderProps) {
                 <span>All Products</span>
               </Link>
 
+              <Link
+                to="/cart"
+                className="flex items-center space-x-3 px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <div className="relative">
+                  <ShoppingCart className="w-5 h-5 text-gray-400" />
+                  {totalItems > 0 && (
+                    <span className="absolute -top-1.5 -right-1.5 bg-emerald-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
+                      {totalItems}
+                    </span>
+                  )}
+                </div>
+                <span>Shopping Cart</span>
+              </Link>
+
               {/* Categories Accordion */}
               <div className="rounded-xl overflow-hidden">
                 <button
@@ -315,6 +331,23 @@ export default function Header({ onAuthClick }: HeaderProps) {
                 <MapPin className="w-5 h-5 text-gray-400" />
                 <span>Our Stores</span>
               </Link>
+            </div>
+
+            {/* Theme Toggle */}
+            <div className="pt-2 border-t border-gray-800">
+              <button
+                onClick={toggleTheme}
+                className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
+              >
+                <div className="flex items-center space-x-3">
+                  {theme === 'light' ? (
+                    <Moon className="w-5 h-5 text-gray-400" />
+                  ) : (
+                    <Sun className="w-5 h-5 text-gray-400" />
+                  )}
+                  <span>{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</span>
+                </div>
+              </button>
             </div>
 
             {/* Account Management Section */}
