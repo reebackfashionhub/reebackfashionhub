@@ -99,7 +99,7 @@ export default function HomePage() {
             <p className="text-gray-600 dark:text-gray-300">Explore our fashion categories</p>
           </AnimateOnScroll>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {categories.map((category, index) => (
               <AnimateOnScroll key={category.id} delay={index * 100}>
                 <Link
