@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingCart, User, Menu, X, Search, Sun, Moon, ChevronDown } from 'lucide-react';
+import { ShoppingCart, User, Menu, X, Search, Sun, Moon, ChevronDown, ChevronRight, Home, ShoppingBag, MapPin, Settings, Package, Shield, LogOut, Tags } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { useCart } from '../../hooks/useCart';
 import { useTheme } from '../../hooks/useTheme';
@@ -13,6 +13,7 @@ interface HeaderProps {
 export default function Header({ onAuthClick }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [isMobileCategoryOpen, setIsMobileCategoryOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
@@ -232,90 +233,146 @@ export default function Header({ onAuthClick }: HeaderProps) {
         </div>
 
         {/* Mobile menu */}
-        <div className={`md:hidden transition-all duration-300 ${mobileMenuOpen ? 'max-h-[calc(100vh-4rem)] opacity-100 pb-4 overflow-y-auto' : 'max-h-0 opacity-0 overflow-hidden'}`}>
-          <div className="border-t border-gray-800 mt-2 pt-4 space-y-1">
-            <Link
-              to="/"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Home
-            </Link>
-            <div className="px-3 py-2 text-base font-medium text-gray-500">Categories</div>
-            <div className="pl-6 space-y-1">
-              {categories.map((category) => (
-                <Link
-                  key={category.name}
-                  to={category.href}
-                  className="block px-3 py-2 rounded-md text-sm text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {category.name}
-                </Link>
-              ))}
-            </div>
-            <Link
-              to="/products"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 transition-colors mt-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              All Products
-            </Link>
-            <Link
-              to="/wholesale"
-              className="block px-3 py-2 rounded-md text-base font-medium text-emerald-400 hover:text-emerald-300 hover:bg-gray-800 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Wholesale
-            </Link>
-            <Link
-              to="/stores"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Our Stores
-            </Link>
-
+        <div className={`md:hidden absolute top-16 left-0 w-full bg-dark/95 backdrop-blur-xl border-b border-gray-800 shadow-2xl transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-[calc(100vh-4rem)] opacity-100 overflow-y-auto' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+          <div className="p-4 space-y-6">
+            
+            {/* User Profile Card for Mobile */}
             {user && (
-              <>
-                <div className="px-3 py-2 text-base font-medium text-gray-500 border-t border-gray-800 mt-2 pt-2">My Account</div>
-                <div className="pl-6 space-y-1">
-                  <Link
-                    to="/account"
-                    className="block px-3 py-2 rounded-md text-sm text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Profile Settings
-                  </Link>
-                  <Link
-                    to="/orders"
-                    className="block px-3 py-2 rounded-md text-sm text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    My Orders
-                  </Link>
-                  {profile?.role === 'admin' && (
+              <div className="bg-gray-800/50 rounded-2xl p-4 flex items-center space-x-4 border border-gray-700/50">
+                <div className="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center text-emerald-400 border border-emerald-500/30">
+                  <User className="w-6 h-6" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-base font-semibold text-white truncate">
+                    {profile?.full_name || user?.user_metadata?.full_name || getFirstName()}
+                  </p>
+                  <p className="text-sm text-gray-400 truncate">{user?.email}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Main Navigation */}
+            <div className="space-y-1">
+              <Link
+                to="/"
+                className="flex items-center space-x-3 px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Home className="w-5 h-5 text-gray-400" />
+                <span>Home</span>
+              </Link>
+              
+              <Link
+                to="/products"
+                className="flex items-center space-x-3 px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <ShoppingBag className="w-5 h-5 text-gray-400" />
+                <span>All Products</span>
+              </Link>
+
+              {/* Categories Accordion */}
+              <div className="rounded-xl overflow-hidden">
+                <button
+                  onClick={() => setIsMobileCategoryOpen(!isMobileCategoryOpen)}
+                  className="w-full flex items-center justify-between px-4 py-3 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
+                >
+                  <div className="flex items-center space-x-3">
+                    <Tags className="w-5 h-5 text-gray-400" />
+                    <span>Categories</span>
+                  </div>
+                  <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${isMobileCategoryOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <div className={`transition-all duration-300 ease-in-out bg-gray-900/30 ${isMobileCategoryOpen ? 'max-h-64 opacity-100 py-2' : 'max-h-0 opacity-0'}`}>
+                  {categories.map((category) => (
                     <Link
-                      to="/admin"
-                      className="block px-3 py-2 rounded-md text-sm text-emerald-400 hover:text-emerald-300 hover:bg-gray-800 transition-colors"
+                      key={category.name}
+                      to={category.href}
+                      className="flex items-center space-x-3 pl-12 pr-4 py-2.5 text-sm text-gray-400 hover:text-white hover:bg-gray-800/50 transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Admin Dashboard
+                      <ChevronRight className="w-4 h-4 text-emerald-500/50" />
+                      <span>{category.name}</span>
                     </Link>
-                  )}
-                  <button
-                    onClick={async () => {
-                      setMobileMenuOpen(false);
-                      await signOut();
-                      showToast('Signed out successfully', 'success');
-                      navigate('/');
-                    }}
-                    className="block w-full text-left px-3 py-2 rounded-md text-sm text-red-400 hover:text-red-300 hover:bg-gray-800 transition-colors"
-                  >
-                    Sign Out
-                  </button>
+                  ))}
                 </div>
-              </>
+              </div>
+
+              <Link
+                to="/wholesale"
+                className="flex items-center space-x-3 px-4 py-3 rounded-xl text-base font-medium text-emerald-400 hover:text-emerald-300 hover:bg-emerald-400/10 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Package className="w-5 h-5 text-emerald-500" />
+                <span>Wholesale</span>
+              </Link>
+
+              <Link
+                to="/stores"
+                className="flex items-center space-x-3 px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <MapPin className="w-5 h-5 text-gray-400" />
+                <span>Our Stores</span>
+              </Link>
+            </div>
+
+            {/* Account Management Section */}
+            {user ? (
+              <div className="pt-4 border-t border-gray-800 space-y-1">
+                <p className="px-4 pb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Account</p>
+                <Link
+                  to="/account"
+                  className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Settings className="w-5 h-5 text-gray-400" />
+                  <span>Profile Settings</span>
+                </Link>
+                <Link
+                  to="/orders"
+                  className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Package className="w-5 h-5 text-gray-400" />
+                  <span>My Orders</span>
+                </Link>
+                {profile?.role === 'admin' && (
+                  <Link
+                    to="/admin"
+                    className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-emerald-400 hover:text-emerald-300 hover:bg-emerald-400/10 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Shield className="w-5 h-5 text-emerald-500" />
+                    <span>Admin Dashboard</span>
+                  </Link>
+                )}
+                <button
+                  onClick={async () => {
+                    setMobileMenuOpen(false);
+                    await signOut();
+                    showToast('Signed out successfully', 'success');
+                    navigate('/');
+                  }}
+                  className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:text-red-300 hover:bg-red-400/10 transition-colors mt-4"
+                >
+                  <LogOut className="w-5 h-5 text-red-400" />
+                  <span>Sign Out</span>
+                </button>
+              </div>
+            ) : (
+              <div className="pt-4 border-t border-gray-800">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onAuthClick();
+                  }}
+                  className="w-full flex items-center justify-center space-x-2 bg-emerald-500 text-white px-4 py-3 rounded-xl text-base font-medium hover:bg-emerald-600 transition-colors shadow-lg shadow-emerald-500/20"
+                >
+                  <User className="w-5 h-5" />
+                  <span>Sign In</span>
+                </button>
+              </div>
             )}
           </div>
         </div>
