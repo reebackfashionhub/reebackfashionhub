@@ -157,6 +157,33 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Wholesale Banner Section */}
+      <section className="py-20 bg-emerald-900 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <img 
+            src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=1600&q=80" 
+            alt="Wholesale background" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <AnimateOnScroll animation="fade-up">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+              Looking to Buy in Bulk?
+            </h2>
+            <p className="text-emerald-100 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+              Get special wholesale pricing for your business. Partner with Reeback Fashion to stock your store with premium quality clothing.
+            </p>
+            <Link to="/wholesale">
+              <Button size="lg" className="bg-white text-emerald-900 hover:bg-gray-100 border-transparent shadow-xl">
+                Explore Wholesale Catalog
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
+          </AnimateOnScroll>
+        </div>
+      </section>
+
       <section className="py-20 bg-white dark:bg-gray-800 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 text-center">
