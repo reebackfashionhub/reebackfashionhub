@@ -58,8 +58,6 @@ function AppContent() {
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === 'SIGNED_IN' && session?.user) {
-        showToast('Successfully logged in!', 'success');
-        
         // Check if this is a brand new account (created within the last 30 seconds)
         const isNewUser = Date.now() - new Date(session.user.created_at).getTime() < 30000;
         
