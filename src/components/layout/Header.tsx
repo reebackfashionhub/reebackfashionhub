@@ -153,7 +153,7 @@ export default function Header({ onAuthClick }: HeaderProps) {
 
             <Link
               to="/cart"
-              className="hidden md:flex text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95 relative"
+              className="flex text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95 relative"
               aria-label="Cart"
             >
               <ShoppingCart className="w-5 h-5" />
@@ -238,28 +238,59 @@ export default function Header({ onAuthClick }: HeaderProps) {
             
             {/* User Profile Card for Mobile */}
             {user && (
-              <div className="bg-gray-800/50 rounded-2xl p-4 flex items-center space-x-3 border border-gray-700/50">
-                <div className="w-12 h-12 flex-shrink-0 bg-gray-700 rounded-full flex items-center justify-center text-gray-300">
-                  <User className="w-6 h-6" />
+              <div className="bg-gray-800/50 rounded-2xl p-4 border border-gray-700/50">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-12 h-12 flex-shrink-0 bg-gray-700 rounded-full flex items-center justify-center text-gray-300">
+                    <User className="w-6 h-6" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-base font-semibold text-white truncate">
+                      {profile?.full_name || user?.user_metadata?.full_name || getFirstName()}
+                    </p>
+                    <p className="text-sm text-gray-400 truncate">{user?.email}</p>
+                  </div>
+                  <button
+                    onClick={async () => {
+                      setMobileMenuOpen(false);
+                      await signOut();
+                      showToast('Signed out successfully', 'success');
+                      navigate('/');
+                    }}
+                    className="p-2 text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-lg transition-colors flex-shrink-0"
+                    aria-label="Sign Out"
+                  >
+                    <LogOut className="w-5 h-5" />
+                  </button>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-base font-semibold text-white truncate">
-                    {profile?.full_name || user?.user_metadata?.full_name || getFirstName()}
-                  </p>
-                  <p className="text-sm text-gray-400 truncate">{user?.email}</p>
+
+                <div className="grid grid-cols-2 gap-2 border-t border-gray-700/50 pt-4">
+                  <Link
+                    to="/account"
+                    className="flex items-center justify-center space-x-2 bg-gray-900/50 hover:bg-gray-700 p-2 rounded-lg text-sm font-medium text-gray-300 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Settings className="w-4 h-4" />
+                    <span>Settings</span>
+                  </Link>
+                  <Link
+                    to="/orders"
+                    className="flex items-center justify-center space-x-2 bg-gray-900/50 hover:bg-gray-700 p-2 rounded-lg text-sm font-medium text-gray-300 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Package className="w-4 h-4" />
+                    <span>Orders</span>
+                  </Link>
+                  {profile?.role === 'admin' && (
+                    <Link
+                      to="/admin"
+                      className="col-span-2 flex items-center justify-center space-x-2 bg-emerald-900/20 text-emerald-400 hover:bg-emerald-900/40 p-2 rounded-lg text-sm font-medium transition-colors border border-emerald-900/50"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Shield className="w-4 h-4" />
+                      <span>Admin Dashboard</span>
+                    </Link>
+                  )}
                 </div>
-                <button
-                  onClick={async () => {
-                    setMobileMenuOpen(false);
-                    await signOut();
-                    showToast('Signed out successfully', 'success');
-                    navigate('/');
-                  }}
-                  className="p-2 text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-lg transition-colors flex-shrink-0"
-                  aria-label="Sign Out"
-                >
-                  <LogOut className="w-5 h-5" />
-                </button>
               </div>
             )}
 
@@ -287,21 +318,7 @@ export default function Header({ onAuthClick }: HeaderProps) {
                 <span className="text-base font-medium text-gray-300 group-hover:text-white">All Products</span>
               </Link>
 
-              <Link
-                to="/cart"
-                className="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-gray-800/50 active:scale-[0.98] transition-all group"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-gray-700 transition-colors relative">
-                  <ShoppingCart className="w-5 h-5" />
-                  {totalItems > 0 && (
-                    <span className="absolute -top-1.5 -right-1.5 bg-emerald-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
-                      {totalItems}
-                    </span>
-                  )}
-                </div>
-                <span className="text-base font-medium text-gray-300 group-hover:text-white">Shopping Cart</span>
-              </Link>
+
 
               {/* Categories Accordion */}
               <div className="rounded-xl overflow-hidden group">
@@ -371,38 +388,8 @@ export default function Header({ onAuthClick }: HeaderProps) {
               </button>
             </div>
 
-            {/* Account Management Section */}
-            {user ? (
-              <div className="pt-4 border-t border-gray-800 space-y-1">
-                <p className="px-4 pb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Account</p>
-                <Link
-                  to="/account"
-                  className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Settings className="w-5 h-5 text-gray-400" />
-                  <span>Profile Settings</span>
-                </Link>
-                <Link
-                  to="/orders"
-                  className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Package className="w-5 h-5 text-gray-400" />
-                  <span>My Orders</span>
-                </Link>
-                {profile?.role === 'admin' && (
-                  <Link
-                    to="/admin"
-                    className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-emerald-400 hover:text-emerald-300 hover:bg-emerald-400/10 transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <Shield className="w-5 h-5 text-emerald-500" />
-                    <span>Admin Dashboard</span>
-                  </Link>
-                )}
-              </div>
-            ) : (
+
+            {!user && (
               <div className="pt-4 border-t border-gray-800">
                 <button
                   onClick={() => {
