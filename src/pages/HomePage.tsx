@@ -83,7 +83,7 @@ export default function HomePage() {
             </AnimateOnScroll>
             <AnimateOnScroll animation="slide-in-right" delay={200} className="mt-8 lg:mt-0">
               <img
-                src="https://placehold.co/800x500/e2e8f0/1e293b?text=Welcome+to+Reeback+Fashion"
+                src="https://images.unsplash.com/photo-1490578474892-0c6886c0a27e?w=800"
                 alt="Fashion"
                 className="w-full h-[300px] lg:h-[500px] object-cover rounded-2xl shadow-2xl"
               />
