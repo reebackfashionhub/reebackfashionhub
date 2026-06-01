@@ -29,6 +29,7 @@ import {
   AdminInquiries,
   AdminLayout,
 } from './pages/admin';
+import ScrollToTop from './components/ui/ScrollToTop';
 import { useState, useEffect } from 'react';
 import { supabase } from './lib/supabase';
 import { useToast } from './components/ui/Toast';
@@ -85,6 +86,7 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col transition-colors">
+      <ScrollToTop />
       <Routes>
         <Route
           path="/admin"
