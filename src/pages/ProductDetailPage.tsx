@@ -240,9 +240,11 @@ export default function ProductDetailPage() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <span className="text-gray-400">No image</span>
-                  </div>
+                  <img
+                    src={`https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80&auto=format&fit=crop`}
+                    alt="Placeholder fashion model"
+                    className="w-full h-full object-cover opacity-90"
+                  />
                 )}
               </div>
 
