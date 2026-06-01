@@ -238,8 +238,8 @@ export default function Header({ onAuthClick }: HeaderProps) {
             
             {/* User Profile Card for Mobile */}
             {user && (
-              <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-4 flex items-center space-x-4 border border-gray-700 shadow-inner">
-                <div className="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center text-emerald-400 border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+              <div className="bg-gray-800/50 rounded-2xl p-4 flex items-center space-x-3 border border-gray-700/50">
+                <div className="w-12 h-12 flex-shrink-0 bg-gray-700 rounded-full flex items-center justify-center text-gray-300">
                   <User className="w-6 h-6" />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -248,6 +248,18 @@ export default function Header({ onAuthClick }: HeaderProps) {
                   </p>
                   <p className="text-sm text-gray-400 truncate">{user?.email}</p>
                 </div>
+                <button
+                  onClick={async () => {
+                    setMobileMenuOpen(false);
+                    await signOut();
+                    showToast('Signed out successfully', 'success');
+                    navigate('/');
+                  }}
+                  className="p-2 text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-lg transition-colors flex-shrink-0"
+                  aria-label="Sign Out"
+                >
+                  <LogOut className="w-5 h-5" />
+                </button>
               </div>
             )}
 
@@ -404,18 +416,6 @@ export default function Header({ onAuthClick }: HeaderProps) {
                     <span>Admin Dashboard</span>
                   </Link>
                 )}
-                <button
-                  onClick={async () => {
-                    setMobileMenuOpen(false);
-                    await signOut();
-                    showToast('Signed out successfully', 'success');
-                    navigate('/');
-                  }}
-                  className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:text-red-300 hover:bg-red-400/10 transition-colors mt-4"
-                >
-                  <LogOut className="w-5 h-5 text-red-400" />
-                  <span>Sign Out</span>
-                </button>
               </div>
             ) : (
               <div className="pt-4 border-t border-gray-800">
