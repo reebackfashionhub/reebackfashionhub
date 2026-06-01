@@ -62,25 +62,26 @@ export default function Header({ onAuthClick }: HeaderProps) {
           <div className="hidden md:flex items-center space-x-8">
             <Link
               to="/"
-              className="text-gray-300 hover:text-white transition-colors text-sm font-medium tracking-wide"
+              className="relative text-gray-300 hover:text-white transition-colors text-sm font-medium tracking-wide py-1 group"
             >
               Home
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-emerald-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
             </Link>
             
-            <div className="relative group"
+            <div className="relative group py-1"
                  onMouseEnter={() => setIsCategoryOpen(true)}
                  onMouseLeave={() => setIsCategoryOpen(false)}>
-              <button className="flex items-center text-gray-300 hover:text-white transition-colors text-sm font-medium tracking-wide py-2 outline-none">
+              <button className="flex items-center text-gray-300 hover:text-white transition-colors text-sm font-medium tracking-wide outline-none">
                 Categories
-                <ChevronDown className="w-4 h-4 ml-1 opacity-70" />
+                <ChevronDown className={`w-4 h-4 ml-1 transition-transform duration-300 ${isCategoryOpen ? 'rotate-180' : 'opacity-70'}`} />
               </button>
               
-              <div className={`absolute top-full left-0 w-56 bg-dark border border-gray-800 rounded-lg shadow-xl py-2 transition-all duration-200 ${isCategoryOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-2 invisible'}`}>
+              <div className={`absolute top-full left-0 w-64 bg-dark/90 backdrop-blur-xl border border-gray-700/50 rounded-xl shadow-2xl py-3 mt-2 transition-all duration-300 transform origin-top-left ${isCategoryOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}>
                 {categories.map((category) => (
                   <Link
                     key={category.name}
                     to={category.href}
-                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
+                    className="block px-5 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-gray-800/50 hover:pl-7 transition-all duration-300"
                   >
                     {category.name}
                   </Link>
@@ -90,30 +91,33 @@ export default function Header({ onAuthClick }: HeaderProps) {
 
             <Link
               to="/products"
-              className="text-gray-300 hover:text-white transition-colors text-sm font-medium tracking-wide"
+              className="relative text-gray-300 hover:text-white transition-colors text-sm font-medium tracking-wide py-1 group"
             >
               All Products
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-emerald-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
             </Link>
 
             <Link
               to="/wholesale"
-              className="text-emerald-400 hover:text-emerald-300 transition-colors text-sm font-medium tracking-wide"
+              className="relative text-emerald-400 hover:text-emerald-300 transition-colors text-sm font-medium tracking-wide py-1 group"
             >
               Wholesale
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-emerald-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
             </Link>
             
             <Link
               to="/stores"
-              className="text-gray-300 hover:text-white transition-colors text-sm font-medium tracking-wide"
+              className="relative text-gray-300 hover:text-white transition-colors text-sm font-medium tracking-wide py-1 group"
             >
               Our Stores
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-emerald-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
             </Link>
           </div>
 
           <div className="flex items-center space-x-5">
             <button
               onClick={toggleTheme}
-              className="text-gray-400 hover:text-white transition-colors p-1"
+              className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95"
               aria-label="Toggle theme"
             >
               {theme === 'light' ? (
@@ -124,34 +128,36 @@ export default function Header({ onAuthClick }: HeaderProps) {
             </button>
 
             {isSearchOpen ? (
-              <form onSubmit={handleSearchSubmit} className="flex items-center relative">
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search products..."
-                  className="bg-gray-800 text-white text-sm rounded-full pl-3 pr-8 py-1 focus:outline-none focus:ring-1 focus:ring-gray-500 w-32 md:w-48 transition-all border border-gray-700"
-                  autoFocus
-                  onBlur={() => setTimeout(() => setIsSearchOpen(false), 200)}
-                />
-                <button type="button" onClick={() => setIsSearchOpen(false)} className="absolute right-2 text-gray-400 hover:text-white">
-                  <X className="w-4 h-4" />
-                </button>
-              </form>
+              <div className="absolute inset-0 bg-dark/95 z-50 flex items-center px-4 md:static md:inset-auto md:bg-transparent md:px-0 md:z-auto md:flex">
+                <form onSubmit={handleSearchSubmit} className="flex-1 flex items-center relative w-full">
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search products..."
+                    className="w-full md:w-48 bg-gray-800 text-white text-sm rounded-full pl-4 pr-10 py-2.5 md:py-1.5 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-all border border-gray-700 shadow-inner"
+                    autoFocus
+                    onBlur={() => setTimeout(() => setIsSearchOpen(false), 200)}
+                  />
+                  <button type="button" onClick={() => setIsSearchOpen(false)} className="absolute right-3 p-1 text-gray-400 hover:text-white">
+                    <X className="w-5 h-5 md:w-4 md:h-4" />
+                  </button>
+                </form>
+              </div>
             ) : (
-              <button onClick={() => setIsSearchOpen(true)} className="text-gray-400 hover:text-white transition-colors p-1" aria-label="Search">
+              <button onClick={() => setIsSearchOpen(true)} className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95" aria-label="Search">
                 <Search className="w-5 h-5" />
               </button>
             )}
 
             <Link
               to="/cart"
-              className="text-gray-400 hover:text-white transition-colors p-1 relative"
+              className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95 relative"
               aria-label="Cart"
             >
               <ShoppingCart className="w-5 h-5" />
               {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 bg-white text-black text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
+                <span className="absolute top-0 right-0 bg-emerald-500 text-white shadow-sm text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center transform translate-x-1/4 -translate-y-1/4">
                   {totalItems}
                 </span>
               )}
@@ -159,7 +165,7 @@ export default function Header({ onAuthClick }: HeaderProps) {
 
             {user ? (
               <div className="relative group">
-                <button className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors p-1 outline-none">
+                <button className="flex items-center space-x-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95 outline-none">
                   <User className="w-5 h-5" />
                 </button>
                 <div className="absolute right-0 top-full pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
@@ -204,7 +210,7 @@ export default function Header({ onAuthClick }: HeaderProps) {
             ) : (
               <button
                 onClick={onAuthClick}
-                className="text-gray-400 hover:text-white transition-colors p-1"
+                className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95"
                 aria-label="Sign in"
               >
                 <User className="w-5 h-5" />
