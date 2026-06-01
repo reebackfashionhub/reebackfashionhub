@@ -51,38 +51,41 @@ export default function Header({ onAuthClick }: HeaderProps) {
   ];
 
   return (
-    <header className="bg-dark/95 backdrop-blur-md text-gray-100 shadow-sm sticky top-0 z-40 transition-all border-b border-gray-800">
+    <header className="bg-white text-gray-900 shadow-sm sticky top-0 z-40 transition-all border-b border-gray-100">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold tracking-tight text-white hover:text-gray-300 transition-colors">
-              Reeback Fashion
+        <div className="grid grid-cols-3 items-center h-20">
+          
+          {/* Left Logo */}
+          <div className="flex items-center justify-start">
+            <Link to="/" className="text-2xl md:text-3xl font-black tracking-tighter text-black hover:text-gray-700 transition-colors uppercase">
+              Reeback
             </Link>
           </div>
 
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Center Navigation */}
+          <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8">
             <Link
               to="/"
-              className="relative text-gray-300 hover:text-white transition-colors text-sm font-medium tracking-wide py-1 group"
+              className="relative text-gray-600 hover:text-black transition-colors text-sm font-bold tracking-widest uppercase py-1 group"
             >
               Home
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-emerald-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
             </Link>
             
             <div className="relative group py-1"
                  onMouseEnter={() => setIsCategoryOpen(true)}
                  onMouseLeave={() => setIsCategoryOpen(false)}>
-              <button className="flex items-center text-gray-300 hover:text-white transition-colors text-sm font-medium tracking-wide outline-none">
+              <button className="flex items-center text-gray-600 hover:text-black transition-colors text-sm font-bold tracking-widest uppercase outline-none">
                 Categories
                 <ChevronDown className={`w-4 h-4 ml-1 transition-transform duration-300 ${isCategoryOpen ? 'rotate-180' : 'opacity-70'}`} />
               </button>
               
-              <div className={`absolute top-full left-0 w-64 bg-dark/90 backdrop-blur-xl border border-gray-700/50 rounded-xl shadow-2xl py-3 mt-2 transition-all duration-300 transform origin-top-left ${isCategoryOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}>
+              <div className={`absolute top-full left-0 w-56 bg-white border border-gray-100 rounded-xl shadow-xl py-3 mt-4 transition-all duration-300 transform origin-top-left ${isCategoryOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}>
                 {categories.map((category) => (
                   <Link
                     key={category.name}
                     to={category.href}
-                    className="block px-5 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-gray-800/50 hover:pl-7 transition-all duration-300"
+                    className="block px-5 py-2.5 text-sm text-gray-600 hover:text-black hover:bg-gray-50 hover:pl-7 transition-all duration-300"
                   >
                     {category.name}
                   </Link>
@@ -92,73 +95,66 @@ export default function Header({ onAuthClick }: HeaderProps) {
 
             <Link
               to="/products"
-              className="relative text-gray-300 hover:text-white transition-colors text-sm font-medium tracking-wide py-1 group"
+              className="relative text-gray-600 hover:text-black transition-colors text-sm font-bold tracking-widest uppercase py-1 group"
             >
-              All Products
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-emerald-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
+              Products
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
             </Link>
 
             <Link
               to="/wholesale"
-              className="relative text-emerald-400 hover:text-emerald-300 transition-colors text-sm font-medium tracking-wide py-1 group"
+              className="relative text-emerald-600 hover:text-emerald-800 transition-colors text-sm font-bold tracking-widest uppercase py-1 group hidden lg:block"
             >
               Wholesale
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-emerald-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
-            </Link>
-            
-            <Link
-              to="/stores"
-              className="relative text-gray-300 hover:text-white transition-colors text-sm font-medium tracking-wide py-1 group"
-            >
-              Our Stores
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-emerald-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-emerald-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
             </Link>
           </div>
 
-          <div className="flex items-center space-x-1 md:space-x-5">
+          {/* Right Icons */}
+          <div className="flex items-center space-x-2 md:space-x-4 justify-end">
             <button
               onClick={toggleTheme}
-              className="flex text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95"
+              className="flex text-black hover:text-gray-500 transition-colors p-2"
               aria-label="Toggle theme"
             >
               {theme === 'light' ? (
-                <Moon className="w-5 h-5" />
+                <Moon className="w-6 h-6" strokeWidth={1.5} />
               ) : (
-                <Sun className="w-5 h-5" />
+                <Sun className="w-6 h-6" strokeWidth={1.5} />
               )}
             </button>
 
             {isSearchOpen ? (
-              <div className="absolute inset-0 bg-dark/95 z-50 flex items-center px-4 md:static md:inset-auto md:bg-transparent md:px-0 md:z-auto md:flex">
+              <div className="absolute inset-0 bg-white z-50 flex items-center px-4 md:static md:inset-auto md:bg-transparent md:px-0 md:z-auto md:flex">
                 <form onSubmit={handleSearchSubmit} className="flex-1 flex items-center relative w-full">
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search products..."
-                    className="w-full md:w-48 bg-gray-800 text-white text-base md:text-sm rounded-full pl-4 pr-10 py-2.5 md:py-1.5 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-all border border-gray-700 shadow-inner"
+                    className="w-full md:w-48 bg-gray-50 text-black text-base md:text-sm rounded-full pl-4 pr-10 py-2.5 md:py-1.5 focus:outline-none focus:ring-1 focus:ring-black transition-all border border-gray-200"
                     autoFocus
                     onBlur={() => setTimeout(() => setIsSearchOpen(false), 200)}
                   />
-                  <button type="button" onClick={() => setIsSearchOpen(false)} className="absolute right-3 p-1 text-gray-400 hover:text-white">
-                    <X className="w-5 h-5 md:w-4 md:h-4" />
+                  <button type="button" onClick={() => setIsSearchOpen(false)} className="absolute right-3 p-1 text-black hover:text-gray-500">
+                    <X className="w-5 h-5" strokeWidth={1.5} />
                   </button>
                 </form>
               </div>
             ) : (
-              <button onClick={() => setIsSearchOpen(true)} className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95" aria-label="Search">
-                <Search className="w-5 h-5" />
+              <button onClick={() => setIsSearchOpen(true)} className="text-black hover:text-gray-500 transition-colors p-2" aria-label="Search">
+                <Search className="w-6 h-6" strokeWidth={1.5} />
               </button>
             )}
 
             <Link
               to="/cart"
-              className="flex text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95 relative"
+              className="flex text-black hover:text-gray-500 transition-colors p-2 relative"
               aria-label="Cart"
             >
-              <ShoppingCart className="w-5 h-5" />
+              <ShoppingCart className="w-6 h-6" strokeWidth={1.5} />
               {totalItems > 0 && (
-                <span className="absolute top-0 right-0 bg-emerald-500 text-white shadow-sm text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center transform translate-x-1/4 -translate-y-1/4">
+                <span className="absolute top-1 right-0 bg-black text-white shadow-sm text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center transform translate-x-1/4 -translate-y-1/4">
                   {totalItems}
                 </span>
               )}
@@ -166,31 +162,31 @@ export default function Header({ onAuthClick }: HeaderProps) {
 
             {user ? (
               <div className="relative group hidden md:block">
-                <button className="flex items-center space-x-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95 outline-none">
-                  <User className="w-5 h-5" />
+                <button className="flex items-center space-x-2 text-black hover:text-gray-500 transition-colors p-2 outline-none">
+                  <User className="w-6 h-6" strokeWidth={1.5} />
                 </button>
                 <div className="absolute right-0 top-full pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <div className="bg-gray-900 border border-gray-800 rounded-lg shadow-xl py-2">
-                    <div className="px-4 py-2 border-b border-gray-800 mb-2">
-                    <span className="block text-sm text-white font-medium truncate">{profile?.full_name || user?.user_metadata?.full_name || getFirstName()}</span>
-                    <span className="block text-xs text-gray-400 truncate">{user?.email}</span>
+                  <div className="bg-white border border-gray-100 rounded-xl shadow-xl py-2">
+                    <div className="px-4 py-2 border-b border-gray-100 mb-2">
+                    <span className="block text-sm text-gray-900 font-bold truncate">{profile?.full_name || user?.user_metadata?.full_name || getFirstName()}</span>
+                    <span className="block text-xs text-gray-500 truncate">{user?.email}</span>
                   </div>
                   <Link
                     to="/account"
-                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
+                    className="block px-4 py-2 text-sm text-gray-600 hover:text-black hover:bg-gray-50 transition-colors"
                   >
                     My Account
                   </Link>
                   <Link
                     to="/orders"
-                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
+                    className="block px-4 py-2 text-sm text-gray-600 hover:text-black hover:bg-gray-50 transition-colors"
                   >
                     My Orders
                   </Link>
                   {profile?.role === 'admin' && (
                     <Link
                       to="/admin"
-                      className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-black hover:bg-gray-50 transition-colors"
                     >
                       Admin Dashboard
                     </Link>
@@ -201,7 +197,7 @@ export default function Header({ onAuthClick }: HeaderProps) {
                       showToast('Signed out successfully', 'success');
                       navigate('/');
                     }}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors mt-2 border-t border-gray-800 pt-2"
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-600 hover:text-black hover:bg-gray-50 transition-colors mt-2 border-t border-gray-100 pt-2"
                   >
                     Sign Out
                   </button>
@@ -211,16 +207,16 @@ export default function Header({ onAuthClick }: HeaderProps) {
             ) : (
               <button
                 onClick={onAuthClick}
-                className="hidden md:flex text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95"
+                className="hidden md:flex text-black hover:text-gray-500 transition-colors p-2"
                 aria-label="Sign in"
               >
-                <User className="w-5 h-5" />
+                <User className="w-6 h-6" strokeWidth={1.5} />
               </button>
             )}
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-gray-400 hover:text-white p-1 ml-2"
+              className="md:hidden text-black hover:text-gray-500 p-1 ml-2"
               aria-label="Menu"
             >
               {mobileMenuOpen ? (
