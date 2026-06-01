@@ -238,8 +238,8 @@ export default function Header({ onAuthClick }: HeaderProps) {
             
             {/* User Profile Card for Mobile */}
             {user && (
-              <div className="bg-gray-800/50 rounded-2xl p-4 flex items-center space-x-4 border border-gray-700/50">
-                <div className="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center text-emerald-400 border border-emerald-500/30">
+              <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-4 flex items-center space-x-4 border border-gray-700 shadow-inner">
+                <div className="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center text-emerald-400 border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                   <User className="w-6 h-6" />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -252,50 +252,65 @@ export default function Header({ onAuthClick }: HeaderProps) {
             )}
 
             {/* Main Navigation */}
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               <Link
                 to="/"
-                className="flex items-center space-x-3 px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
+                className="flex items-center justify-between group px-4 py-3 rounded-xl hover:bg-gray-800/50 active:scale-[0.98] transition-all"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <Home className="w-5 h-5 text-gray-400" />
-                <span>Home</span>
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-gray-700 transition-colors">
+                    <Home className="w-5 h-5" />
+                  </div>
+                  <span className="text-base font-medium text-gray-300 group-hover:text-white">Home</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-gray-400" />
               </Link>
               
               <Link
                 to="/products"
-                className="flex items-center space-x-3 px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
+                className="flex items-center justify-between group px-4 py-3 rounded-xl hover:bg-gray-800/50 active:scale-[0.98] transition-all"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <ShoppingBag className="w-5 h-5 text-gray-400" />
-                <span>All Products</span>
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-gray-700 transition-colors">
+                    <ShoppingBag className="w-5 h-5" />
+                  </div>
+                  <span className="text-base font-medium text-gray-300 group-hover:text-white">All Products</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-gray-400" />
               </Link>
 
               <Link
                 to="/cart"
-                className="flex items-center space-x-3 px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
+                className="flex items-center justify-between group px-4 py-3 rounded-xl hover:bg-gray-800/50 active:scale-[0.98] transition-all"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <div className="relative">
-                  <ShoppingCart className="w-5 h-5 text-gray-400" />
-                  {totalItems > 0 && (
-                    <span className="absolute -top-1.5 -right-1.5 bg-emerald-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
-                      {totalItems}
-                    </span>
-                  )}
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-gray-700 transition-colors relative">
+                    <ShoppingCart className="w-5 h-5" />
+                    {totalItems > 0 && (
+                      <span className="absolute -top-1.5 -right-1.5 bg-emerald-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
+                        {totalItems}
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-base font-medium text-gray-300 group-hover:text-white">Shopping Cart</span>
                 </div>
-                <span>Shopping Cart</span>
+                <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-gray-400" />
               </Link>
 
               {/* Categories Accordion */}
-              <div className="rounded-xl overflow-hidden">
+              <div className="rounded-xl overflow-hidden group">
                 <button
                   onClick={() => setIsMobileCategoryOpen(!isMobileCategoryOpen)}
-                  className="w-full flex items-center justify-between px-4 py-3 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
+                  className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-800/50 active:scale-[0.98] transition-all"
                 >
                   <div className="flex items-center space-x-3">
-                    <Tags className="w-5 h-5 text-gray-400" />
-                    <span>Categories</span>
+                    <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white transition-colors">
+                      <Tags className="w-5 h-5" />
+                    </div>
+                    <span className="text-base font-medium text-gray-300 group-hover:text-white transition-colors">Categories</span>
                   </div>
                   <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${isMobileCategoryOpen ? 'rotate-180' : ''}`} />
                 </button>
@@ -304,10 +319,9 @@ export default function Header({ onAuthClick }: HeaderProps) {
                     <Link
                       key={category.name}
                       to={category.href}
-                      className="flex items-center space-x-3 pl-12 pr-4 py-2.5 text-sm text-gray-400 hover:text-white hover:bg-gray-800/50 transition-colors"
+                      className="flex items-center space-x-3 pl-[3.25rem] pr-4 py-2.5 text-sm text-gray-400 hover:text-white hover:bg-gray-800/50 transition-colors border-l-2 border-transparent hover:border-emerald-500 ml-4"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      <ChevronRight className="w-4 h-4 text-emerald-500/50" />
                       <span>{category.name}</span>
                     </Link>
                   ))}
@@ -316,20 +330,30 @@ export default function Header({ onAuthClick }: HeaderProps) {
 
               <Link
                 to="/wholesale"
-                className="flex items-center space-x-3 px-4 py-3 rounded-xl text-base font-medium text-emerald-400 hover:text-emerald-300 hover:bg-emerald-400/10 transition-colors"
+                className="flex items-center justify-between group px-4 py-3 rounded-xl hover:bg-emerald-500/10 active:scale-[0.98] transition-all"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <Package className="w-5 h-5 text-emerald-500" />
-                <span>Wholesale</span>
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-emerald-500/20 rounded-lg text-emerald-400 group-hover:text-emerald-300 transition-colors">
+                    <Package className="w-5 h-5" />
+                  </div>
+                  <span className="text-base font-medium text-emerald-400 group-hover:text-emerald-300">Wholesale</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-emerald-500/50 group-hover:text-emerald-400" />
               </Link>
 
               <Link
                 to="/stores"
-                className="flex items-center space-x-3 px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
+                className="flex items-center justify-between group px-4 py-3 rounded-xl hover:bg-gray-800/50 active:scale-[0.98] transition-all"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <MapPin className="w-5 h-5 text-gray-400" />
-                <span>Our Stores</span>
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-gray-700 transition-colors">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <span className="text-base font-medium text-gray-300 group-hover:text-white">Our Stores</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-gray-400" />
               </Link>
             </div>
 
@@ -337,15 +361,15 @@ export default function Header({ onAuthClick }: HeaderProps) {
             <div className="pt-2 border-t border-gray-800">
               <button
                 onClick={toggleTheme}
-                className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
+                className="w-full flex items-center justify-between group px-4 py-3 rounded-xl hover:bg-gray-800/50 active:scale-[0.98] transition-all"
               >
                 <div className="flex items-center space-x-3">
-                  {theme === 'light' ? (
-                    <Moon className="w-5 h-5 text-gray-400" />
-                  ) : (
-                    <Sun className="w-5 h-5 text-gray-400" />
-                  )}
-                  <span>{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</span>
+                  <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-gray-700 transition-colors">
+                    {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+                  </div>
+                  <span className="text-base font-medium text-gray-300 group-hover:text-white">
+                    {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
+                  </span>
                 </div>
               </button>
             </div>
