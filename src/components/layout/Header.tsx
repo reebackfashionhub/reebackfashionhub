@@ -115,10 +115,10 @@ export default function Header({ onAuthClick }: HeaderProps) {
             </Link>
           </div>
 
-          <div className="flex items-center space-x-2 md:space-x-5">
+          <div className="flex items-center space-x-1 md:space-x-5">
             <button
               onClick={toggleTheme}
-              className="hidden md:flex text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95"
+              className="flex text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full transition-all p-2 transform hover:scale-110 active:scale-95"
               aria-label="Toggle theme"
             >
               {theme === 'light' ? (
@@ -371,22 +371,7 @@ export default function Header({ onAuthClick }: HeaderProps) {
               </Link>
             </div>
 
-            {/* Theme Toggle */}
-            <div className="pt-2 border-t border-gray-800">
-              <button
-                onClick={toggleTheme}
-                className="w-full flex items-center justify-between group px-4 py-3 rounded-xl hover:bg-gray-800/50 active:scale-[0.98] transition-all"
-              >
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-gray-700 transition-colors">
-                    {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
-                  </div>
-                  <span className="text-base font-medium text-gray-300 group-hover:text-white">
-                    {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
-                  </span>
-                </div>
-              </button>
-            </div>
+
 
 
             {!user && (
