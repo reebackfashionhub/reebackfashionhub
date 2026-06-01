@@ -267,49 +267,40 @@ export default function Header({ onAuthClick }: HeaderProps) {
             <div className="space-y-1.5">
               <Link
                 to="/"
-                className="flex items-center justify-between group px-4 py-3 rounded-xl hover:bg-gray-800/50 active:scale-[0.98] transition-all"
+                className="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-gray-800/50 active:scale-[0.98] transition-all group"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-gray-700 transition-colors">
-                    <Home className="w-5 h-5" />
-                  </div>
-                  <span className="text-base font-medium text-gray-300 group-hover:text-white">Home</span>
+                <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-gray-700 transition-colors">
+                  <Home className="w-5 h-5" />
                 </div>
-                <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-gray-400" />
+                <span className="text-base font-medium text-gray-300 group-hover:text-white">Home</span>
               </Link>
               
               <Link
                 to="/products"
-                className="flex items-center justify-between group px-4 py-3 rounded-xl hover:bg-gray-800/50 active:scale-[0.98] transition-all"
+                className="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-gray-800/50 active:scale-[0.98] transition-all group"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-gray-700 transition-colors">
-                    <ShoppingBag className="w-5 h-5" />
-                  </div>
-                  <span className="text-base font-medium text-gray-300 group-hover:text-white">All Products</span>
+                <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-gray-700 transition-colors">
+                  <ShoppingBag className="w-5 h-5" />
                 </div>
-                <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-gray-400" />
+                <span className="text-base font-medium text-gray-300 group-hover:text-white">All Products</span>
               </Link>
 
               <Link
                 to="/cart"
-                className="flex items-center justify-between group px-4 py-3 rounded-xl hover:bg-gray-800/50 active:scale-[0.98] transition-all"
+                className="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-gray-800/50 active:scale-[0.98] transition-all group"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-gray-700 transition-colors relative">
-                    <ShoppingCart className="w-5 h-5" />
-                    {totalItems > 0 && (
-                      <span className="absolute -top-1.5 -right-1.5 bg-emerald-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
-                        {totalItems}
-                      </span>
-                    )}
-                  </div>
-                  <span className="text-base font-medium text-gray-300 group-hover:text-white">Shopping Cart</span>
+                <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-gray-700 transition-colors relative">
+                  <ShoppingCart className="w-5 h-5" />
+                  {totalItems > 0 && (
+                    <span className="absolute -top-1.5 -right-1.5 bg-emerald-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
+                      {totalItems}
+                    </span>
+                  )}
                 </div>
-                <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-gray-400" />
+                <span className="text-base font-medium text-gray-300 group-hover:text-white">Shopping Cart</span>
               </Link>
 
               {/* Categories Accordion */}
@@ -342,30 +333,24 @@ export default function Header({ onAuthClick }: HeaderProps) {
 
               <Link
                 to="/wholesale"
-                className="flex items-center justify-between group px-4 py-3 rounded-xl hover:bg-emerald-500/10 active:scale-[0.98] transition-all"
+                className="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-emerald-500/10 active:scale-[0.98] transition-all group"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-emerald-500/20 rounded-lg text-emerald-400 group-hover:text-emerald-300 transition-colors">
-                    <Package className="w-5 h-5" />
-                  </div>
-                  <span className="text-base font-medium text-emerald-400 group-hover:text-emerald-300">Wholesale</span>
+                <div className="p-2 bg-emerald-500/20 rounded-lg text-emerald-400 group-hover:text-emerald-300 transition-colors">
+                  <Package className="w-5 h-5" />
                 </div>
-                <ChevronRight className="w-4 h-4 text-emerald-500/50 group-hover:text-emerald-400" />
+                <span className="text-base font-medium text-emerald-400 group-hover:text-emerald-300">Wholesale</span>
               </Link>
 
               <Link
                 to="/stores"
-                className="flex items-center justify-between group px-4 py-3 rounded-xl hover:bg-gray-800/50 active:scale-[0.98] transition-all"
+                className="flex items-center space-x-3 px-4 py-3 rounded-xl hover:bg-gray-800/50 active:scale-[0.98] transition-all group"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-gray-700 transition-colors">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <span className="text-base font-medium text-gray-300 group-hover:text-white">Our Stores</span>
+                <div className="p-2 bg-gray-800 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-gray-700 transition-colors">
+                  <MapPin className="w-5 h-5" />
                 </div>
-                <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-gray-400" />
+                <span className="text-base font-medium text-gray-300 group-hover:text-white">Our Stores</span>
               </Link>
             </div>
 

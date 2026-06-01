@@ -106,11 +106,17 @@ export default function HomePage() {
                   to={`/category/${category.slug}`}
                   className="group relative aspect-[3/4] overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-700 block"
                 >
-                  {category.image_url && (
+                  {category.image_url ? (
                     <img
                       src={category.image_url}
                       alt={category.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                  ) : (
+                    <img
+                      src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=500&q=80&auto=format&fit=crop"
+                      alt={category.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 opacity-90"
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
