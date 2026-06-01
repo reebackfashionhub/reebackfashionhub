@@ -135,7 +135,7 @@ export default function Header({ onAuthClick }: HeaderProps) {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search products..."
-                    className="w-full md:w-48 bg-gray-800 text-white text-sm rounded-full pl-4 pr-10 py-2.5 md:py-1.5 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-all border border-gray-700 shadow-inner"
+                    className="w-full md:w-48 bg-gray-800 text-white text-base md:text-sm rounded-full pl-4 pr-10 py-2.5 md:py-1.5 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-all border border-gray-700 shadow-inner"
                     autoFocus
                     onBlur={() => setTimeout(() => setIsSearchOpen(false), 200)}
                   />
