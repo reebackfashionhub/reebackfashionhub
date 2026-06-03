@@ -147,13 +147,11 @@ export default function HomePage() {
             </Link>
           </AnimateOnScroll>
 
-          <AnimateOnScroll delay={200}>
-            <ProductGrid
-              products={featuredProducts}
-              loading={loading}
-              onAddToCart={handleAddToCart}
-            />
-          </AnimateOnScroll>
+          <ProductGrid
+            products={featuredProducts}
+            loading={loading}
+            onAddToCart={handleAddToCart}
+          />
         </div>
       </section>
 

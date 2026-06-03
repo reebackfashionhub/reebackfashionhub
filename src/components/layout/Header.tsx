@@ -53,17 +53,17 @@ export default function Header({ onAuthClick }: HeaderProps) {
   return (
     <header className="bg-white text-gray-900 shadow-sm sticky top-0 z-40 transition-all border-b border-gray-100">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-3 items-center h-20">
+        <div className="flex items-center justify-between h-20 relative">
           
           {/* Left Logo */}
-          <div className="flex items-center justify-start">
+          <div className="flex items-center">
             <Link to="/" className="text-2xl md:text-3xl font-black tracking-tighter text-black hover:text-gray-700 transition-colors uppercase">
               Reeback
             </Link>
           </div>
 
           {/* Center Navigation */}
-          <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8">
+          <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 absolute left-1/2 transform -translate-x-1/2">
             <Link
               to="/"
               className="relative text-gray-600 hover:text-black transition-colors text-sm font-bold tracking-widest uppercase py-1 group"
@@ -111,7 +111,7 @@ export default function Header({ onAuthClick }: HeaderProps) {
           </div>
 
           {/* Right Icons */}
-          <div className="flex items-center space-x-2 md:space-x-4 justify-end">
+          <div className="flex items-center space-x-2 md:space-x-4">
             <button
               onClick={toggleTheme}
               className="flex text-black hover:text-gray-500 transition-colors p-2"
